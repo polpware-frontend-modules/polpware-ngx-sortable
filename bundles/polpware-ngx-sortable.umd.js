@@ -255,20 +255,15 @@
             this.listSorted.emit(this.items);
         };
         NgxSortableComponent.prototype.onDrop = function ($event, index) {
-            $event.preventDefault();
-            $event.stopPropagation();
             // index is of the element on which the item is dropped
             this.handleDrop(index);
         };
         NgxSortableComponent.prototype.allowDrop = function ($event, index) {
             $event.preventDefault();
-            $event.stopPropagation();
             // index is of the item on which the item is currently hovered
             this.onDragOverIndex = index;
         };
         NgxSortableComponent.prototype.onDragStart = function ($event, index) {
-            $event.preventDefault();
-            $event.stopPropagation();
             this.draggedIndex = index;
         };
         NgxSortableComponent.prototype.handleDrop = function (droppedIndex) {

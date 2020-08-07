@@ -34,20 +34,15 @@ let NgxSortableComponent = class NgxSortableComponent {
         this.listSorted.emit(this.items);
     }
     onDrop($event, index) {
-        $event.preventDefault();
-        $event.stopPropagation();
         // index is of the element on which the item is dropped
         this.handleDrop(index);
     }
     allowDrop($event, index) {
         $event.preventDefault();
-        $event.stopPropagation();
         // index is of the item on which the item is currently hovered
         this.onDragOverIndex = index;
     }
     onDragStart($event, index) {
-        $event.preventDefault();
-        $event.stopPropagation();
         this.draggedIndex = index;
     }
     handleDrop(droppedIndex) {
