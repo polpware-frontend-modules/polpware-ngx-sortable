@@ -1,3 +1,4 @@
+import { __spread } from 'tslib';
 import { ɵɵgetCurrentView, ɵɵelementStart, ɵɵtext, ɵɵelementEnd, ɵɵlistener, ɵɵrestoreView, ɵɵnextContext, ɵɵproperty, ɵɵadvance, ɵɵtextInterpolate, ɵɵelement, ɵɵtemplate, ɵɵpureFunction1, EventEmitter, ɵɵdefineComponent, ɵɵcontentQuery, TemplateRef, ɵɵqueryRefresh, ɵɵloadQuery, ɵsetClassMetadata, Component, Input, Output, ContentChild, ɵɵdefineNgModule, ɵɵdefineInjector, ɵɵsetNgModuleScope, NgModule } from '@angular/core';
 import { NgClass, NgIf, NgForOf, CommonModule } from '@angular/common';
 
@@ -97,17 +98,23 @@ var NgxSortableComponent = /** @class */ (function () {
         this.draggedIndex = index;
     };
     NgxSortableComponent.prototype.handleDrop = function (droppedIndex) {
+        var _this = this;
         var item = this.items[this.draggedIndex];
-        this.items.splice(this.draggedIndex, 1);
-        this.items.splice(droppedIndex, 0, item);
+        // Split the items at the dropped index.
+        var pred = this.items.filter(function (_, i) { return i < droppedIndex && i !== _this.draggedIndex; });
+        var succ = this.items.filter(function (_, i) { return i >= droppedIndex && i !== _this.draggedIndex; });
+        // Cmobine them
+        this.items = __spread(pred, [item], succ);
         this.draggedIndex = -1;
         this.onDragOverIndex = -1;
         this.listSorted.emit(this.items);
     };
     NgxSortableComponent.prototype.swapElements = function (oldIndex, newIndex) {
-        var temp = this.items[oldIndex];
-        this.items[oldIndex] = this.items[newIndex];
-        this.items[newIndex] = temp;
+        var newItems = __spread(this.items);
+        var temp = newItems[oldIndex];
+        newItems[oldIndex] = newItems[newIndex];
+        newItems[newIndex] = temp;
+        this.items = newItems;
     };
     NgxSortableComponent.ɵfac = function NgxSortableComponent_Factory(t) { return new (t || NgxSortableComponent)(); };
     NgxSortableComponent.ɵcmp = ɵɵdefineComponent({ type: NgxSortableComponent, selectors: [["polp-ngx-sortable"]], contentQueries: function NgxSortableComponent_ContentQueries(rf, ctx, dirIndex) { if (rf & 1) {

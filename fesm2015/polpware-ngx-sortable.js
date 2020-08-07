@@ -98,16 +98,21 @@ class NgxSortableComponent {
     }
     handleDrop(droppedIndex) {
         const item = this.items[this.draggedIndex];
-        this.items.splice(this.draggedIndex, 1);
-        this.items.splice(droppedIndex, 0, item);
+        // Split the items at the dropped index.
+        const pred = this.items.filter((_, i) => i < droppedIndex && i !== this.draggedIndex);
+        const succ = this.items.filter((_, i) => i >= droppedIndex && i !== this.draggedIndex);
+        // Cmobine them
+        this.items = [...pred, item, ...succ];
         this.draggedIndex = -1;
         this.onDragOverIndex = -1;
         this.listSorted.emit(this.items);
     }
     swapElements(oldIndex, newIndex) {
-        const temp = this.items[oldIndex];
-        this.items[oldIndex] = this.items[newIndex];
-        this.items[newIndex] = temp;
+        const newItems = [...this.items];
+        const temp = newItems[oldIndex];
+        newItems[oldIndex] = newItems[newIndex];
+        newItems[newIndex] = temp;
+        this.items = newItems;
     }
 }
 NgxSortableComponent.ɵfac = function NgxSortableComponent_Factory(t) { return new (t || NgxSortableComponent)(); };
