@@ -57,6 +57,7 @@ function NgxSortableComponent_li_3_Template(rf, ctx) { if (rf & 1) {
 class NgxSortableComponent {
     constructor() {
         this.showHeader = true;
+        this.reRender = false;
         this.containerClasses = '';
         this.headerClasses = '';
         this.listClasses = '';
@@ -85,15 +86,20 @@ class NgxSortableComponent {
         this.listSorted.emit(this.items);
     }
     onDrop($event, index) {
+        $event.preventDefault();
+        $event.stopPropagation();
         // index is of the element on which the item is dropped
         this.handleDrop(index);
     }
     allowDrop($event, index) {
+        $event.preventDefault();
+        $event.stopPropagation();
         // index is of the item on which the item is currently hovered
         this.onDragOverIndex = index;
-        $event.preventDefault();
     }
     onDragStart($event, index) {
+        $event.preventDefault();
+        $event.stopPropagation();
         this.draggedIndex = index;
     }
     handleDrop(droppedIndex) {
@@ -102,7 +108,15 @@ class NgxSortableComponent {
         const pred = this.items.filter((_, i) => i < droppedIndex && i !== this.draggedIndex);
         const succ = this.items.filter((_, i) => i >= droppedIndex && i !== this.draggedIndex);
         // Cmobine them
-        this.items = [...pred, item, ...succ];
+        const newItems = [...pred, item, ...succ];
+        if (this.reRender) {
+            this.items = newItems.map(a => {
+                return Object.assign({}, a);
+            });
+        }
+        else {
+            this.items = newItems;
+        }
         this.draggedIndex = -1;
         this.onDragOverIndex = -1;
         this.listSorted.emit(this.items);
@@ -112,7 +126,14 @@ class NgxSortableComponent {
         const temp = newItems[oldIndex];
         newItems[oldIndex] = newItems[newIndex];
         newItems[newIndex] = temp;
-        this.items = newItems;
+        if (this.reRender) {
+            this.items = newItems.map(a => {
+                return Object.assign({}, a);
+            });
+        }
+        else {
+            this.items = newItems;
+        }
     }
 }
 NgxSortableComponent.ɵfac = function NgxSortableComponent_Factory(t) { return new (t || NgxSortableComponent)(); };
@@ -121,7 +142,7 @@ NgxSortableComponent.ɵcmp = ɵɵdefineComponent({ type: NgxSortableComponent, s
     } if (rf & 2) {
         var _t;
         ɵɵqueryRefresh(_t = ɵɵloadQuery()) && (ctx.itemTemplate = _t.first);
-    } }, inputs: { items: "items", name: "name", showHeader: "showHeader", containerClasses: "containerClasses", headerClasses: "headerClasses", listClasses: "listClasses", dropzoneClasses: "dropzoneClasses" }, outputs: { listSorted: "listSorted" }, decls: 4, vars: 4, consts: [[1, "sortable-container", 3, "ngClass"], ["class", "sortable-header", 3, "ngClass", 4, "ngIf"], [1, "sortable-list", 3, "ngClass"], ["draggable", "true", 3, "ngClass", "click", "drop", "dragover", "dragstart", 4, "ngFor", "ngForOf"], [1, "sortable-header", 3, "ngClass"], [1, "sortable-name"], [1, "sortable-buttons"], ["title", "Move Up", 3, "disabled", "click"], ["title", "Move Down", 3, "disabled", "click"], ["draggable", "true", 3, "ngClass", "click", "drop", "dragover", "dragstart"], ["class", "drop-zone", 3, "ngClass", 4, "ngIf"], ["ngFor", "", 3, "ngForOf", "ngForTemplate"], [1, "drop-zone", 3, "ngClass"]], template: function NgxSortableComponent_Template(rf, ctx) { if (rf & 1) {
+    } }, inputs: { items: "items", name: "name", showHeader: "showHeader", reRender: "reRender", containerClasses: "containerClasses", headerClasses: "headerClasses", listClasses: "listClasses", dropzoneClasses: "dropzoneClasses" }, outputs: { listSorted: "listSorted" }, decls: 4, vars: 4, consts: [[1, "sortable-container", 3, "ngClass"], ["class", "sortable-header", 3, "ngClass", 4, "ngIf"], [1, "sortable-list", 3, "ngClass"], ["draggable", "true", 3, "ngClass", "click", "drop", "dragover", "dragstart", 4, "ngFor", "ngForOf"], [1, "sortable-header", 3, "ngClass"], [1, "sortable-name"], [1, "sortable-buttons"], ["title", "Move Up", 3, "disabled", "click"], ["title", "Move Down", 3, "disabled", "click"], ["draggable", "true", 3, "ngClass", "click", "drop", "dragover", "dragstart"], ["class", "drop-zone", 3, "ngClass", 4, "ngIf"], ["ngFor", "", 3, "ngForOf", "ngForTemplate"], [1, "drop-zone", 3, "ngClass"]], template: function NgxSortableComponent_Template(rf, ctx) { if (rf & 1) {
         ɵɵelementStart(0, "div", 0);
         ɵɵtemplate(1, NgxSortableComponent_div_1_Template, 8, 4, "div", 1);
         ɵɵelementStart(2, "ul", 2);
@@ -149,6 +170,8 @@ NgxSortableComponent.ɵcmp = ɵɵdefineComponent({ type: NgxSortableComponent, s
         }], name: [{
             type: Input
         }], showHeader: [{
+            type: Input
+        }], reRender: [{
             type: Input
         }], containerClasses: [{
             type: Input

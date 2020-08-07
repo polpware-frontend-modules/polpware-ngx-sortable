@@ -4,6 +4,7 @@ export declare class NgxSortableComponent {
     items: any[];
     name: string;
     showHeader: boolean;
+    reRender: boolean;
     containerClasses: string;
     headerClasses: string;
     listClasses: string;
@@ -23,5 +24,5 @@ export declare class NgxSortableComponent {
     handleDrop(droppedIndex: number): void;
     swapElements(oldIndex: number, newIndex: number): void;
     static ɵfac: i0.ɵɵFactoryDef<NgxSortableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDefWithMeta<NgxSortableComponent, "polp-ngx-sortable", never, { "items": "items"; "name": "name"; "showHeader": "showHeader"; "containerClasses": "containerClasses"; "headerClasses": "headerClasses"; "listClasses": "listClasses"; "dropzoneClasses": "dropzoneClasses"; }, { "listSorted": "listSorted"; }, ["itemTemplate"], never>;
+    static ɵcmp: i0.ɵɵComponentDefWithMeta<NgxSortableComponent, "polp-ngx-sortable", never, { "items": "items"; "name": "name"; "showHeader": "showHeader"; "reRender": "reRender"; "containerClasses": "containerClasses"; "headerClasses": "headerClasses"; "listClasses": "listClasses"; "dropzoneClasses": "dropzoneClasses"; }, { "listSorted": "listSorted"; }, ["itemTemplate"], never>;
 }
