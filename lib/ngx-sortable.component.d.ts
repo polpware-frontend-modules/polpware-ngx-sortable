@@ -1,5 +1,4 @@
 import { EventEmitter, TemplateRef, ElementRef } from '@angular/core';
-import * as i0 from "@angular/core";
 export declare class NgxSortableComponent {
     items: any[];
     name: string;
@@ -23,6 +22,4 @@ export declare class NgxSortableComponent {
     onDragStart($event: any, index: number): void;
     handleDrop(droppedIndex: number): void;
     swapElements(oldIndex: number, newIndex: number): void;
-    static ɵfac: i0.ɵɵFactoryDef<NgxSortableComponent, never>;
-    static ɵcmp: i0.ɵɵComponentDefWithMeta<NgxSortableComponent, "polp-ngx-sortable", never, { "items": "items"; "name": "name"; "showHeader": "showHeader"; "reRender": "reRender"; "containerClasses": "containerClasses"; "headerClasses": "headerClasses"; "listClasses": "listClasses"; "dropzoneClasses": "dropzoneClasses"; }, { "listSorted": "listSorted"; }, ["itemTemplate"], never>;
 }
