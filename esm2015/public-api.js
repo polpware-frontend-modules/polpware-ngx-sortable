@@ -1,0 +1,6 @@
+/*
+ * Public API Surface of ngx-sortable
+ */
+export * from './lib/ngx-sortable.component';
+export * from './lib/ngx-sortable.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0Bwb2xwd2FyZS9uZ3gtc29ydGFibGUvIiwic291cmNlcyI6WyJwdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztHQUVHO0FBRUgsY0FBYyw4QkFBOEIsQ0FBQztBQUM3QyxjQUFjLDJCQUEyQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLypcbiAqIFB1YmxpYyBBUEkgU3VyZmFjZSBvZiBuZ3gtc29ydGFibGVcbiAqL1xuXG5leHBvcnQgKiBmcm9tICcuL2xpYi9uZ3gtc29ydGFibGUuY29tcG9uZW50JztcbmV4cG9ydCAqIGZyb20gJy4vbGliL25neC1zb3J0YWJsZS5tb2R1bGUnO1xuIl19
